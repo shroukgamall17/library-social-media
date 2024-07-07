@@ -1,7 +1,8 @@
+require('dotenv').config(); // Load environment variables at the very top
+
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const dotenv = require("dotenv").config();
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const http = require("http");
@@ -61,6 +62,10 @@ app.post("/send-notification", async (req, res) => {
     res.status(500).json({ message: "Failed to save notification" });
   }
 });
+
+// Debug log for environment variables
+console.log('DB Connection String:', process.env.CONNECTION_DB);
+console.log('Server Port:', process.env.PORT);
 
 mongoose.connect(process.env.CONNECTION_DB)
   .then(() => console.log("Connected to DB 😃"))
